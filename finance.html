@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Management - Air School</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-plane"></i>
+                <h1>Air School Management System</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="finance.html" class="active">Finance</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span id="userName">Admin</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Finance Management</h2>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="openPaymentModal()">
+                        <i class="fas fa-plus"></i> Record Payment
+                    </button>
+                    <button class="btn btn-secondary" onclick="openExpenseModal()">
+                        <i class="fas fa-minus"></i> Record Expense
+                    </button>
+                </div>
+            </div>
+
+            <!-- Finance Summary -->
+            <div class="finance-summary">
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h4>Total Revenue</h4>
+                        <p id="totalRevenue">$0.00</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h4>Total Expenses</h4>
+                        <p id="totalExpenses">$0.00</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h4>Net Profit</h4>
+                        <p id="netProfit">$0.00</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h4>Outstanding Fees</h4>
+                        <p id="outstandingFees">$0.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finance Tabs -->
+            <div class="finance-tabs">
+                <button class="tab-btn active" onclick="showTab('payments')">Payments</button>
+                <button class="tab-btn" onclick="showTab('expenses')">Expenses</button>
+                <button class="tab-btn" onclick="showTab('fees')">Fee Structure</button>
+            </div>
+
+            <!-- Payments Tab -->
+            <div id="paymentsTab" class="tab-content active">
+                <div class="search-filter">
+                    <div class="search-box">
+                        <input type="text" id="paymentSearch" placeholder="Search payments...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-options">
+                        <select id="paymentStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Overdue">Overdue</option>
+                        </select>
+                        <input type="date" id="paymentDateFilter" placeholder="Filter by date">
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table" id="paymentsTable">
+                        <thead>
+                            <tr>
+                                <th>Payment ID</th>
+                                <th>Student</th>
+                                <th>Course</th>
+                                <th>Amount</th>
+                                <th>Payment Date</th>
+                                <th>Status</th>
+                                <th>Method</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsTableBody">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Expenses Tab -->
+            <div id="expensesTab" class="tab-content">
+                <div class="search-filter">
+                    <div class="search-box">
+                        <input type="text" id="expenseSearch" placeholder="Search expenses...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-options">
+                        <select id="expenseCategoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="Fuel">Fuel</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Salaries">Salaries</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input type="date" id="expenseDateFilter" placeholder="Filter by date">
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table" id="expensesTable">
+                        <thead>
+                            <tr>
+                                <th>Expense ID</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expensesTableBody">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Fee Structure Tab -->
+            <div id="feesTab" class="tab-content">
+                <div class="fee-structure">
+                    <h3>Course Fee Structure</h3>
+                    <div class="fee-cards" id="feeCards">
+                        <!-- Fee cards will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Modal -->
+            <div id="paymentModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Record Payment</h3>
+                        <span class="close" onclick="closePaymentModal()">&times;</span>
+                    </div>
+                    <form id="paymentForm" class="modal-body">
+                        <div class="form-group">
+                            <label for="studentSelect">Student *</label>
+                            <select id="studentSelect" name="studentSelect" required>
+                                <option value="">Select Student</option>
+                                <!-- Options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="courseSelect">Course *</label>
+                            <select id="courseSelect" name="courseSelect" required>
+                                <option value="">Select Course</option>
+                                <option value="PPL">Private Pilot License</option>
+                                <option value="CPL">Commercial Pilot License</option>
+                                <option value="ATPL">Airline Transport Pilot License</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount *</label>
+                            <input type="number" id="amount" name="amount" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentMethod">Payment Method *</label>
+                            <select id="paymentMethod" name="paymentMethod" required>
+                                <option value="">Select Method</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Card">Card</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                <option value="Check">Check</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentDate">Payment Date *</label>
+                            <input type="date" id="paymentDate" name="paymentDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <textarea id="notes" name="notes" rows="3"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closePaymentModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Record Payment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Expense Modal -->
+            <div id="expenseModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Record Expense</h3>
+                        <span class="close" onclick="closeExpenseModal()">&times;</span>
+                    </div>
+                    <form id="expenseForm" class="modal-body">
+                        <div class="form-group">
+                            <label for="expenseDescription">Description *</label>
+                            <input type="text" id="expenseDescription" name="expenseDescription" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseCategory">Category *</label>
+                            <select id="expenseCategory" name="expenseCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="Fuel">Fuel</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Salaries">Salaries</option>
+                                <option value="Utilities">Utilities</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseAmount">Amount *</label>
+                            <input type="number" id="expenseAmount" name="expenseAmount" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseDate">Date *</label>
+                            <input type="date" id="expenseDate" name="expenseDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseNotes">Notes</label>
+                            <textarea id="expenseNotes" name="expenseNotes" rows="3"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closeExpenseModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Record Expense</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>&copy; 2024 Air School Management System. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="js/finance.js"></script>
+</body>
+</html>

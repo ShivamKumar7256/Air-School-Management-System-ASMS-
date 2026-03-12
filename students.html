@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management - Air School</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-plane"></i>
+                <h1>Air School Management System</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="students.html" class="active">Students</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="examinations.html">Examinations</a></li>
+                    <li><a href="finance.html">Finance</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span id="userName">Admin</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Student Management</h2>
+                <button class="btn btn-primary" onclick="openStudentModal()">
+                    <i class="fas fa-plus"></i> Add New Student
+                </button>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="search-filter">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search students...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-options">
+                    <select id="courseFilter">
+                        <option value="">All Courses</option>
+                        <option value="PPL">Private Pilot License</option>
+                        <option value="CPL">Commercial Pilot License</option>
+                        <option value="ATPL">Airline Transport Pilot License</option>
+                    </select>
+                    <select id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Graduated">Graduated</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Students Table -->
+            <div class="table-container">
+                <table class="data-table" id="studentsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Course</th>
+                            <th>Status</th>
+                            <th>Join Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTableBody">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="btn btn-secondary" onclick="previousPage()">Previous</button>
+                <span id="pageInfo">Page 1 of 1</span>
+                <button class="btn btn-secondary" onclick="nextPage()">Next</button>
+            </div>
+        </main>
+
+        <!-- Student Modal -->
+        <div id="studentModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Add New Student</h3>
+                    <span class="close" onclick="closeStudentModal()">&times;</span>
+                </div>
+                <form id="studentForm" class="modal-body">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of Birth *</label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" name="address" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="course">Course *</label>
+                        <select id="course" name="course" required>
+                            <option value="">Select Course</option>
+                            <option value="PPL">Private Pilot License</option>
+                            <option value="CPL">Commercial Pilot License</option>
+                            <option value="ATPL">Airline Transport Pilot License</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status *</label>
+                        <select id="status" name="status" required>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="Graduated">Graduated</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeStudentModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Student</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Air School Management System. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/students.js"></script>
+</body>
+</html>

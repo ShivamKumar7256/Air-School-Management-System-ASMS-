@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examinations - Air School</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-plane"></i>
+                <h1>Air School Management System</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="examinations.html" class="active">Examinations</a></li>
+                    <li><a href="finance.html">Finance</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span id="userName">Admin</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Examination Management</h2>
+                <button class="btn btn-primary" onclick="openExamModal()">
+                    <i class="fas fa-plus"></i> Schedule Exam
+                </button>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="search-filter">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search examinations...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-options">
+                    <select id="examTypeFilter">
+                        <option value="">All Types</option>
+                        <option value="Theory">Theory</option>
+                        <option value="Practical">Practical</option>
+                        <option value="Oral">Oral</option>
+                        <option value="Simulator">Simulator</option>
+                    </select>
+                    <select id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="Scheduled">Scheduled</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Examinations Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Exam Name</th>
+                            <th>Course</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Venue</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="examinationsTableBody">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Exam Modal -->
+            <div id="examModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="modalTitle">Schedule Examination</h3>
+                        <span class="close" onclick="closeExamModal()">&times;</span>
+                    </div>
+                    <form id="examForm" class="modal-body">
+                        <div class="form-group">
+                            <label for="examName">Exam Name *</label>
+                            <input type="text" id="examName" name="examName" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="courseId">Course *</label>
+                                <select id="courseId" name="courseId" required>
+                                    <option value="">Select Course</option>
+                                    <option value="1">Private Pilot License (PPL)</option>
+                                    <option value="2">Commercial Pilot License (CPL)</option>
+                                    <option value="3">Ground School - Navigation</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="examType">Exam Type *</label>
+                                <select id="examType" name="examType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Theory">Theory</option>
+                                    <option value="Practical">Practical</option>
+                                    <option value="Oral">Oral</option>
+                                    <option value="Simulator">Simulator</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="examDate">Exam Date *</label>
+                                <input type="date" id="examDate" name="examDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="startTime">Start Time *</label>
+                                <input type="time" id="startTime" name="startTime" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="endTime">End Time</label>
+                                <input type="time" id="endTime" name="endTime">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="maxMarks">Max Marks *</label>
+                                <input type="number" id="maxMarks" name="maxMarks" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="passingMarks">Passing Marks *</label>
+                                <input type="number" id="passingMarks" name="passingMarks" min="1" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="instructorId">Instructor</label>
+                            <select id="instructorId" name="instructorId">
+                                <option value="">Select Instructor</option>
+                                <option value="1">Captain Smith</option>
+                                <option value="2">Dr. Sarah Johnson</option>
+                                <option value="3">Mike Wilson</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="venue">Venue</label>
+                            <input type="text" id="venue" name="venue" placeholder="Exam venue">
+                        </div>
+                        <div class="form-group">
+                            <label for="instructions">Instructions</label>
+                            <textarea id="instructions" name="instructions" rows="3" placeholder="Special instructions for the exam"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closeExamModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Schedule Exam</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/examinations.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air School Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-plane"></i>
+                <h1>Air School Management System</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="examinations.html">Examinations</a></li>
+                    <li><a href="finance.html">Finance</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span id="userName">Admin</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="dashboard">
+                <div class="welcome-section">
+                    <h2>Welcome to Air School Management System</h2>
+                    <p>Streamline your aviation training operations with our comprehensive management platform</p>
+                </div>
+
+                <!-- Dashboard Cards -->
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Students</h3>
+                            <p id="studentCount">0</p>
+                            <a href="students.html" class="card-link">Manage Students</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Faculty</h3>
+                            <p id="facultyCount">0</p>
+                            <a href="faculty.html" class="card-link">Manage Faculty</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Courses</h3>
+                            <p id="courseCount">0</p>
+                            <a href="courses.html" class="card-link">Manage Courses</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Attendance</h3>
+                            <p id="attendanceToday">0%</p>
+                            <a href="attendance.html" class="card-link">View Attendance</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Finance</h3>
+                            <p id="totalRevenue">$0</p>
+                            <a href="finance.html" class="card-link">View Finance</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Reports</h3>
+                            <p>Analytics</p>
+                            <a href="reports.html" class="card-link">View Reports</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activities -->
+                <div class="recent-activities">
+                    <h3>Recent Activities</h3>
+                    <div class="activity-list" id="activityList">
+                        <div class="activity-item">
+                            <i class="fas fa-user-plus"></i>
+                            <span>New student registered: John Doe</span>
+                            <span class="time">2 hours ago</span>
+                        </div>
+                        <div class="activity-item">
+                            <i class="fas fa-book"></i>
+                            <span>New course added: Private Pilot License</span>
+                            <span class="time">4 hours ago</span>
+                        </div>
+                        <div class="activity-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Payment received: $2,500</span>
+                            <span class="time">6 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Air School Management System. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

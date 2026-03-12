@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Management - Air School</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-plane"></i>
+                <h1>Air School Management System</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="attendance.html" class="active">Attendance</a></li>
+                    <li><a href="finance.html">Finance</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span id="userName">Admin</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Attendance Management</h2>
+                <button class="btn btn-primary" onclick="markAttendance()">
+                    <i class="fas fa-check"></i> Mark Attendance
+                </button>
+            </div>
+
+            <!-- Attendance Filters -->
+            <div class="attendance-filters">
+                <div class="filter-group">
+                    <label for="dateFilter">Date:</label>
+                    <input type="date" id="dateFilter" value="">
+                </div>
+                <div class="filter-group">
+                    <label for="courseFilter">Course:</label>
+                    <select id="courseFilter">
+                        <option value="">All Courses</option>
+                        <option value="PPL">Private Pilot License</option>
+                        <option value="CPL">Commercial Pilot License</option>
+                        <option value="ATPL">Airline Transport Pilot License</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button class="btn btn-secondary" onclick="loadAttendance()">
+                        <i class="fas fa-search"></i> Load Attendance
+                    </button>
+                </div>
+            </div>
+
+            <!-- Attendance Summary -->
+            <div class="attendance-summary">
+                <div class="summary-card">
+                    <h4>Today's Attendance</h4>
+                    <div class="summary-stats">
+                        <div class="stat">
+                            <span class="stat-number" id="totalStudents">0</span>
+                            <span class="stat-label">Total Students</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="presentStudents">0</span>
+                            <span class="stat-label">Present</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="absentStudents">0</span>
+                            <span class="stat-label">Absent</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="attendancePercentage">0%</span>
+                            <span class="stat-label">Attendance %</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Table -->
+            <div class="table-container">
+                <table class="data-table" id="attendanceTable">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Course</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mark Attendance Modal -->
+            <div id="attendanceModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Mark Attendance</h3>
+                        <span class="close" onclick="closeAttendanceModal()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="attendanceDate">Date *</label>
+                            <input type="date" id="attendanceDate" name="attendanceDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="attendanceCourse">Course *</label>
+                            <select id="attendanceCourse" name="attendanceCourse" required>
+                                <option value="">Select Course</option>
+                                <option value="PPL">Private Pilot License</option>
+                                <option value="CPL">Commercial Pilot License</option>
+                                <option value="ATPL">Airline Transport Pilot License</option>
+                            </select>
+                        </div>
+                        <div class="attendance-list" id="attendanceList">
+                            <!-- Student attendance list will be populated here -->
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closeAttendanceModal()">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="saveAttendance()">Save Attendance</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>&copy; 2024 Air School Management System. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="js/attendance.js"></script>
+</body>
+</html>
